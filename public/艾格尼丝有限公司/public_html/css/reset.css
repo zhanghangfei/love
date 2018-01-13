@@ -1,0 +1,137 @@
+@charset "utf-8";
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0;font-family:"微软雅黑";}/*外边距，内边距都为0*/
+body{font:14px/1.5;background:#fff;font-weigth:300;}/*字体大小为14px*/
+button,input,optgroup,select,textarea {margin: 0;font: inherit;color: inherit;}/*表单类标签外边距，字体及颜色继承父元素的字体系列样式*/
+img{border:none}/*图片不显示边框兼容IE浏览器*/
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:300;}/*这些元素本身不会继承父体的字体大小，设置了font-size:100%后就能自动继承。*/
+input,label,img,th{vertical-align:middle}/*把此元素放置在父元素的中部*/
+ul,ol,li{list-style:none}/*去点实心圆或数字*/
+a{text-decoration:none;outline:0}/*去掉a标签的下划线outline消除虚线框*/
+button,html input[type="button"],input[type="reset"],input[type="submit"] {-webkit-appearance: button;cursor: pointer}/*类似按钮的，hover，mousedown,mouseup的效果及鼠标滑过为手指势*/
+textarea {overflow: hidden;resize:none;}/*多行文本中如果内容被修剪，则浏览器会显示滚动条以便查看其余的内容。*/
+table{border-collapse:collapse;border-spacing:0}/*默认值。边框会被分开。不会忽略 border-spacing 和 empty-cells 属性。*/
+input,textarea,select{outline:0;}/*去除加亮效果*/
+
+/*通用样式*/
+.clearfix{*zoom:1;}/*兼容IE清除浮动*/
+.clearfix:after{content:"\200B";height:0;display:block;visibility:hiden;clear:both;}/*清除浮动*/
+.container{
+	width:1200px;
+	margin:0 auto;
+	}
+.header{
+	width:100%;
+	height:152px;
+	}
+.header .container{
+	height:100px;
+	}
+.logo{
+	float:left;
+	margin-left:42px;
+	}
+.search{
+	margin-top:28px;
+	width:258px;
+	float:right;	
+	}
+.search p{
+	clear:both;
+	}
+.search input[type="submit"]{
+	float:right;
+	width:50px;
+	height:30px;
+	background-image:url(../images/index_04.jpg);
+	background-repeat:no-repeat;
+	background-position:right;
+	border:0;
+	}
+.search input[type="text"]{
+	width:200px;
+	height:30px;
+	float:left;
+	background-image:url(../images/index_03.jpg);
+	background-repeat:no-repeat;
+	background-position:right;
+	
+	border:0;
+	color:#333;
+	margin-left:8px;
+	font-size:12px;
+	text-indent:8px;
+	line-height:30px;
+	}
+.nav{
+	height:52px;
+	background-color:#663300;
+	}
+.nav ul{
+	margin-left:130px;
+	}
+.nav ul li{
+	float:left;
+	width:112px;
+	height:52px;
+	line-height:52px;
+	text-align:center;
+	margin-right:24px;
+	}
+.nav ul li a{
+	display:block;
+	color:#fff;
+	font-size:16px;
+	}
+.footer{
+	background-color:#000;
+	width:100%;
+	height:98px;
+	}
+.top {
+	height:40px;
+	}
+.top ul{
+	margin-left:380px;	
+	}
+.top ul li{
+	margin-top:18px;
+	margin-right:36px;
+	float:left;
+	}
+.top ul li a{
+	color:#fff;
+	font-size:14px;
+	font-family:宋体;
+	}
+.bottom{
+	line-height:58px;
+	text-align:center;
+	}
+.bottom p{
+	font-size:14px;
+	color:#fff;	
+	margin-right:16px;
+	float:left;
+	}
+.bottom p:nth-of-type(1){
+	margin-left:413px;
+	behavior:url("PIE.htc");
+	}
+.nav ul li.on{
+	background-color:#f48516;
+	}
+.nav ul li.on a{
+	color:#000;
+	}
+.nav ul li:hover a{
+	color:#000;
+	}
+.nav ul li:hover{
+	background-color:#f48516;
+	}
+.search p{
+	font-size:18px;
+	color:#d08521;
+	margin-left:15px;
+	margin-top:9px;
+	}

@@ -17,7 +17,7 @@ return [
     // 应用命名空间
     'app_namespace'          => 'app',
     // 应用调试模式
-    'app_debug'              => false,
+    'app_debug'              => true,
     // 应用Trace
     'app_trace'              => false,
     // 应用模式状态
@@ -230,6 +230,15 @@ return [
         'httponly'  => '',
         // 是否使用 setcookie
         'setcookie' => true,
+    ],
+
+    // 视图输出字符串内容替换
+
+    'view_replace_str' => [
+        '__ROOT__' => __ROOT__,
+
+        '__INDEX__'=>__ROOT__ .'/public/static/index',
+
     ],
 
     //分页配置

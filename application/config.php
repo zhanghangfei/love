@@ -8,7 +8,7 @@
 // +----------------------------------------------------------------------
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
-
+use think\Request;//定义IS_AJAX
 return [
     // +----------------------------------------------------------------------
     // | 应用设置
@@ -17,7 +17,7 @@ return [
     // 应用命名空间
     'app_namespace'          => 'app',
     // 应用调试模式
-    'app_debug'              => false,
+    'app_debug'              => true,
     // 应用Trace
     'app_trace'              => false,
     // 应用模式状态
@@ -144,6 +144,7 @@ return [
     'view_replace_str'       => [
             'root'=>'/',
             '__ADMIN__' => '/tp5/public/static/admin',
+            '__LAYUI__' => '/tp5/public/static/layui',
     ],
     // 默认跳转页面对应的模板文件
     'dispatch_success_tmpl'  => THINK_PATH . 'tpl' . DS . 'dispatch_jump.tpl',
@@ -241,4 +242,28 @@ return [
         'var_page'  => 'page',
         'list_rows' => 15,
     ],
+
+    //自定义验证码
+    'captcha' =>[
+            'codeSet' =>'12345', //验证码字符集合
+            'expire'=>60,        //验证码过期时间（s）
+            'useZh'=>false,         //使用中文验证码
+            'zhSet'=>'张行飞love向瑞林',     //中文验证码字符串
+            'useImgBg'=>false,  //使用背景图片
+            'fontSize'=>25,        //验证码字体大小(px)
+            'useCurve'=>true,      //是否画混淆曲线
+            'useNoise'=>true,     //是否添加杂点
+            'imageH'=>45,        //验证码图片高度，设置为0为自动计算
+             'imageW' => 0,//验证码图片宽度，设置为0为自动计算
+            'fontttf'=>'',       //验证码字体，不设置是随机获取
+            'bg	'=>'',        //背景颜色	[243, 251, 254]
+            'length'=>'3',        //验证码位数
+            'reset'=>'true',        //验证成功后是否重置
+    ],
+    //定义IS_AJAX：
+   define('IS_AJAX', request::instance()->isAjax()),
+   //定义IS_POST：
+   define('IS_POST',request::instance()->isPost()),
+   //定义IS_GET：
+   define('IS_GET',request::instance()->isGet()),
 ];

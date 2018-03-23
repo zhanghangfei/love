@@ -3,52 +3,57 @@
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="__ADMIN__/bootstrap/css/bootstrap.min.css">
-    <!-- <link rel="stylesheet" type="text/css" href="__ADMIN__/public/css/base.css">  -->
-    <link rel="stylesheet" type="text/css" href="__ADMIN__/css/b_login.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+ 	<link rel="stylesheet" href="__ADMIN__/bootstrap/css/bootstrap.min.css">
+    	<!-- <link rel="stylesheet" type="text/css" href="__ADMIN__/public/css/base.css">  -->
+    	<link rel="stylesheet" type="text/css" href="__ADMIN__/css/b_login.css">
+	<script src="__ADMIN__/public/js/jquery-3.1.1.min.js"></script>
+	<script src="__LAYUI__/layui.js"></script>
 	<title>后台登录页面</title>
 </head>
 <body>
-<div class="login">
-	<div class="loginmain">
-		<h2>登录管理系统</h2>
+	<div class="login">
+		<div class="loginmain">
+			<h2>登录管理系统</h2>
 			<form action="#" class="form-horizontal">
 		           <!-- 让表单在一行中显示form-horizontal -->
-		          <div class="form-group">
-		              <label for="username" class="col-lg-1 control-label">用户名</label>
-		              <div class="col-lg-4">
-		                <input type="text" name="username" id="username" class="form-control" placeholder="admin">
-		              </div>
-		          </div>
-				  <div class="form-group"></div>
-				  <div class="form-group"></div>
+			   	<div class="form-group">
+		              		<label for="username" class="col-lg-1 control-label">你名字</label>
+		              		<div class="col-lg-4">
+		                		<input type="text" name="username" id="username" class="form-control" placeholder="这个嘞账号">
+		              		</div>
+		          	</div>
+				<div class="form-group"></div>
+		          	<div class="form-group">
+		              		<label for="password" class="col-lg-1 control-label">密&nbsp;&nbsp;&nbsp;&nbsp;码</label>
+		              		<div class="col-lg-4">
+		                		<input type="password" name="password" id="password" class="form-control" placeholder="这个嘞密码">
+		              		</div>
+		          	</div>
+			   	<div class="form-group"></div>
 
-		          <div class="form-group">
-		              <label for="password" class="col-lg-1 control-label">密&nbsp;&nbsp;&nbsp;&nbsp;码</label>
-		              <div class="col-lg-4">
-		                <input type="password" name="password" id="password" class="form-control" placeholder="admin">
-		              </div>
-		          </div>
-                   <div class="form-group"></div>
-                   <!-- <div class="form-group"></div> -->
-
-		          <div class="form-group">
-		            <div class="col-lg-11 col-lg-offset-1">
-		                <span class="checkbox ">
-		                    <label><input type="checkbox" name="" class="checkbox-inline">记住我</label>
-		                </span>
-		            </div>
-		          </div>
-
-		          <div class="form-group">
-		            <div class="col-lg-4 col-lg-offset-1">
-		                <input type="button" name="button" value="登录" class="btn btn-danger btn-lg">
-		                <span class="text"></span>
-		            </div>
-
-		          </div>
-
+		   		<div class="form-group">
+		       			<label for="password" class="col-lg-1 control-label">验证码</label>
+		       			<div class="col-lg-4">
+			 			<input type="password" name="password" id="code" class="form-control" placeholder="这个嘞验证码">
+						<img src="{:captcha_src()}" onclick="genxin(this)" alt="captcha" id="codes" style="cursor:pointer;">
+						<!-- <a href="JavaScript:genxin()">看不清 换一张⑧</a> -->
+		       			</div>
+		   		</div>
+                   		<!-- <div class="form-group"></div> -->
+		          	<div class="form-group">
+			            	<div class="col-lg-11 col-lg-offset-1">
+			                	<span class="checkbox ">
+			                    		<label><input type="checkbox" name="remember"  class="checkbox-inline" >记住我</label>
+			                	</span>
+			            	</div>
+		          	</div>
+		          	<div class="form-group">
+		            		<div class="col-lg-4 col-lg-offset-1">
+						<button type="button" id="buttons" class="btn btn-danger btn-lg">登录</button>
+		                		<span class="text"></span>
+		            		</div>
+		          	</div>
 		    </form>
 	</div>
 	<div class="rightpic">
@@ -56,14 +61,46 @@
 			<!-- <img src="__ADMIN__/picture/1.jpg" alt="" width="500px" height="330px"> -->
 		</div>
 	</div>
-</div>
+	</div>
+<script type="text/javascript">
+	layui.use('layer',function(){
+		var layer = layui.layer;
+	});
+	$("#buttons").click(function(){
+		var username = $("#username").val();
+		var password = $("#password").val();
+		var remember = $('input[class="checkbox-inline"]').is(':checked');
+		var code = $("#code").val();
 
-<script src="__ADMIN__/public/js/jquery-3.1.1.min.js"></script>
+		if(remember){
+			remember = 1;
+		}else{
+			remember = 0;
+		}
+		var data = {"username":username,"password":password,"remember":remember,"code":code}
+		var url = "{:url('Login/index')}";
+
+		$.post(url,data,function(res){
+			if(res.status==1){
+				layer.msg(res.msg,{time:1000});
+				setTimeout(function(){
+					location.href = "{:url('Index/index')}"
+				},1000)
+			}else{
+				layer.msg(res.msg,{time:1000});
+			}
+		},'json')
+	})
+	//点击刷新验证码
+	function genxin(){
+        		var ts = Date.parse(new Date())/1000;
+        		$('#codes').attr("src", "{:captcha_src()}?id="+ts);
+    	}
+</script>
 <script src="__ADMIN__/bootstrap/js/bootstrap.min.js"></script>
 <script src="__ADMIN__/public/js/delaunay.js"></script>
-<script src="__ADMIN__//public/js/TweenMax.js"></script>
+<script src="__ADMIN__/public/js/TweenMax.js"></script>
 <script src="__ADMIN__/js/effect.js"></script>
-
-<script src="__ADMIN__/js/b_login.js"></script>
+<!-- <script src="__ADMIN__/js/b_login.js"></script> -->
 </body>
 </html>

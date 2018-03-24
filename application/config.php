@@ -2,20 +2,18 @@
 // +----------------------------------------------------------------------
 // | ThinkPHP [ WE CAN DO IT JUST THINK ]
 // +----------------------------------------------------------------------
-// | Copyright (c) 2006~2016 http://thinkphp.cn All rights reserved.
+// | Copyright (c) 2006~2018 http://thinkphp.cn All rights reserved.
 // +----------------------------------------------------------------------
 // | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
 // +----------------------------------------------------------------------
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
-use think\Request;//定义IS_AJAX
+use think\Request;//为了定义IS_AJAX
 return [
     // +----------------------------------------------------------------------
     // | 应用设置
     // +----------------------------------------------------------------------
 
-    // 应用命名空间
-    'app_namespace'          => 'app',
     // 应用调试模式
     'app_debug'              => true,
     // 应用Trace
@@ -142,9 +140,8 @@ return [
 
     // 视图输出字符串内容替换
     'view_replace_str'       => [
-            'root'=>'/',
-            '__ADMIN__' => '/tp5/public/static/admin',
-            '__LAYUI__' => '/tp5/public/static/layui',
+            '__ROOT__'=>'/',
+            '__ADMIN__'=>'/love/public/static/admin',
     ],
     // 默认跳转页面对应的模板文件
     'dispatch_success_tmpl'  => THINK_PATH . 'tpl' . DS . 'dispatch_jump.tpl',
@@ -242,7 +239,6 @@ return [
         'var_page'  => 'page',
         'list_rows' => 15,
     ],
-
     //自定义验证码
     'captcha' =>[
             'codeSet' =>'12345', //验证码字符集合
@@ -253,7 +249,7 @@ return [
             'fontSize'=>25,        //验证码字体大小(px)
             'useCurve'=>true,      //是否画混淆曲线
             'useNoise'=>true,     //是否添加杂点
-            'imageH'=>45,        //验证码图片高度，设置为0为自动计算
+            'imageH'=>0,        //验证码图片高度，设置为0为自动计算
              'imageW' => 0,//验证码图片宽度，设置为0为自动计算
             'fontttf'=>'',       //验证码字体，不设置是随机获取
             'bg	'=>'',        //背景颜色	[243, 251, 254]

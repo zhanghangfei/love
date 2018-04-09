@@ -20,31 +20,39 @@
                                 $data['status'] = 1;
                                 $where['campid'] = $keyword['campid'];
                                 $data['campname'] = $keyword['campname'];
-                                if($keyword['campid']){
-                                        $row = db("admin_campcate")->where($where)->update($data);
-                                        if($row){
-                                                $info = [
-                                                        'status' =>1,
-                                                        'msg' => '英雄阵营修改成功'
-                                                ];
-                                        }else{
-                                                $info = [
-                                                        'status' =>0,
-                                                        'msg' =>  '英雄阵营修改失败'
-                                                ];
-                                        }
+                                $look = db("admin_campcate")->where("campname",$keyword['campname'])->find();
+                                if($look){
+                                        $info = [
+                                                'status' =>0,
+                                                'msg' => '英雄阵营已存在哦'
+                                        ];
                                 }else{
-                                        $row = db("admin_campcate")->insert($data);
-                                        if($row){
-                                                $info = [
-                                                        'status' =>1,
-                                                        'msg' => '英雄阵营添加成功'
-                                                ];
+                                        if($keyword['campid']){
+                                                $row = db("admin_campcate")->where($where)->update($data);
+                                                if($row){
+                                                        $info = [
+                                                                'status' =>1,
+                                                                'msg' => '英雄阵营修改成功'
+                                                        ];
+                                                }else{
+                                                        $info = [
+                                                                'status' =>0,
+                                                                'msg' =>  '英雄阵营修改失败'
+                                                        ];
+                                                }
                                         }else{
-                                                $info = [
-                                                        'status' =>0,
-                                                        'msg' =>  '英雄阵营添加失败'
-                                                ];
+                                                $row = db("admin_campcate")->insert($data);
+                                                if($row){
+                                                        $info = [
+                                                                'status' =>1,
+                                                                'msg' => '英雄阵营添加成功'
+                                                        ];
+                                                }else{
+                                                        $info = [
+                                                                'status' =>0,
+                                                                'msg' =>  '英雄阵营添加失败'
+                                                        ];
+                                                }
                                         }
                                 }
                         }
@@ -64,6 +72,45 @@
                                         'status' =>0,
                                         'msg' => '英雄阵营删除失败'
                                 ];
+                        }
+                        return $info;
+                }
+
+                public function campstop($keyword){
+                        $where['campid'] = $keyword;
+                        $status = db("admin_campcate")->where($where)->value('status');
+                        $dataT['status'] = 0;
+                        $dataQ['status'] = 1;
+                        if($status){
+                                $row = db("admin_campcate")->where($where)->update($dataT);
+                                if($row){
+                                        $info = [
+                                                'status' =>1,
+                                                'msg' => '停用成功',
+                                                'title' => '已停用',
+                                                'style' => 'layui-btn-disabled'
+                                        ];
+                                }else{
+                                        $info = [
+                                                'status' =>0,
+                                                'msg' => '停用失败'
+                                        ];
+                                }
+                        }else{
+                                $row = db("admin_campcate")->where($where)->update($dataQ);
+                                if($row){
+                                        $info = [
+                                                'status' =>1,
+                                                'msg' => '恢复成功',
+                                                'title' => '已启用',
+                                                'style' => ''
+                                        ];
+                                }else{
+                                        $info = [
+                                                'status' =>0,
+                                                'msg' => '恢复失败'
+                                        ];
+                                }
                         }
                         return $info;
                 }
